@@ -1,4 +1,5 @@
 from random import choice
+from time import sleep
 # Função limpar terminal
 def limpar_terminal():
     try:
@@ -38,42 +39,62 @@ def entrada_de_valores():
         while txt not in 'SN':
             print('Digite uma resposta válida!')
             txt = input('Gostria de receber os dados em um arquivo txt? [S/N] ').strip().upper()[0]
-
-        for resposta in resp:
-            if resposta == '1': 
-                nome = um_nome()
-                print(nome)
-            elif resposta == '2': 
-                email = um_email()
-                print(email)
-            elif resposta == '3': 
-                telefone = um_telefone()   
-                print(telefone)         
-            elif resposta == '4': 
-                cidade = uma_cidade()
-                print(cidade) 
-            elif resposta == '5': 
-                estado = um_estado()
-                print(estado) 
-            else:
-                print('Digite uma opção válida!')
-        
+                    
         if txt in 'S':
             with open("dados.txt", 'a', newline='') as file:
                 try:
                     for resposta in resp:
                         if resposta == '1':
+                            nome = um_nome()
+                            print(nome)
                             file.write(nome + '\n')
                         elif resposta == '2':
+                            email = um_email()
+                            print(email)
                             file.write(email + '\n')
                         elif resposta == '3':
+                            telefone = um_telefone()
+                            print(telefone)
                             file.write(telefone + '\n')
                         elif resposta == '4':
+                            cidade = uma_cidade()
+                            print(cidade)
                             file.write(cidade + '\n')
                         elif resposta == '5':
+                            email = um_email()
+                            print(email)
                             file.write(estado + '\n')
                 except:
                     print('Erro, você digitou uma opção inválida!')
+
+        elif txt in 'N':
+            for resposta in resp:
+                if resposta == '1': 
+                    nome = um_nome()
+                    print(nome)
+                elif resposta == '2': 
+                    email = um_email()
+                    print(email)
+                elif resposta == '3': 
+                    telefone = um_telefone()   
+                    print(telefone)         
+                elif resposta == '4': 
+                    cidade = uma_cidade()
+                    print(cidade) 
+                elif resposta == '5': 
+                    estado = um_estado()
+                    print(estado) 
+                else:
+                    print('Digite uma opção válida!')
+        resp = input('Você deseja gerar outros dados? (S/N) ').strip().upper()[0]
+        while resp not in 'SN':
+            print('Digite uma resposta válida!')
+            resp = input('Você deseja gerar outros dados? (S/N) ').strip().upper()[0]
+        if resp == 'N':
+            print('Finalizando app...')
+            sleep(1.8)
+            limpar_terminal()            
+            break
         input('Pressione ENTER para recomeçar:')
     
 # Lista dos valores
